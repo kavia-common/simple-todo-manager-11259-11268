@@ -1,0 +1,191 @@
+.screen-todo {
+  background: var(--color-ffffff); /* Screen background per Figma */
+  min-height: 896px;               /* Figma screen height reference */
+}
+
+/* Status bar placeholder (44px high) */
+.status-bar {
+  height: var(--space-44);
+  width: 100%;
+}
+
+/* App Bar (118px height, background = style_2 => color_9395d3) */
+.appbar {
+  position: relative;
+  height: var(--space-118);
+  background: var(--color-9395d3);
+}
+
+/* Title within AppBar (left: 19px, top: ~60px from Figma) */
+.app-title {
+  position: absolute;
+  left: var(--space-19);
+  top: var(--space-60);
+}
+
+/* Calendar icon (right aligned, 32x32) */
+.calendar-icon {
+  position: absolute;
+  right: var(--space-20);
+  top: 53px;
+  width: var(--space-32);
+  height: var(--space-32);
+}
+
+/* Content area */
+.content {
+  padding-top: var(--space-30);
+  padding-bottom: calc(var(--space-68) + var(--space-70)); /* space for bottom nav and FAB overlap */
+}
+
+/* Todos container follows Figma 400px width with 7px side margins on a 414px screen */
+.todos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-14);
+}
+
+/* Todo card (style_22: white background, 15 radius, shadow_0) */
+.todo-card {
+  position: relative;
+  height: var(--space-82);
+  margin: 0 var(--space-7);
+  border-radius: var(--radius-15);
+  background: var(--color-ffffff);
+  box-shadow: var(--shadow-0);
+  display: flex;
+  align-items: center;
+  padding: 0 110px 0 var(--space-19); /* left ~19px per Figma; right room for 3 icons */
+}
+
+/* Titles block aligns left inside card */
+.todo-card .titles {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Right side actions (3 icons: pencil, trash, check) spaced about 45px in Figma (25 icon + 20 gap) */
+.todo-card .actions {
+  position: absolute;
+  right: var(--space-19);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.icon-btn {
+  width: var(--space-25);
+  height: var(--space-25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-15);
+  background: transparent;
+}
+
+/* Completed state styling (muted title + strike-through for clarity) */
+.todo-card.completed .title {
+  color: var(--color-8b8787);
+  text-decoration: line-through;
+}
+
+/* Floating Action Button (70x70 ellipse with plus) */
+.fab {
+  position: fixed;
+  right: 24px;
+  bottom: calc(var(--space-68) + 32px); /* above bottom nav */
+  width: var(--space-70);
+  height: var(--space-70);
+  border-radius: 50%;
+  background: var(--color-9395d3);
+  box-shadow: var(--shadow-0);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Plus icon: draw with pseudo elements to match white stroke */
+.fab .plus {
+  position: relative;
+  display: inline-block;
+  width: 21px;  /* from Figma plus width */
+  height: 23.625px; /* Figma plus height */
+}
+.fab .plus::before,
+.fab .plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: var(--color-ffffff);
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-1);
+}
+.fab .plus::before {
+  width: 2px;   /* stroke ~2px (style_3 border) */
+  height: 18px;
+}
+.fab .plus::after {
+  width: 18px;
+  height: 2px;
+}
+
+/* Bottom Navigation (height 68px, background white) */
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 100%;
+  max-width: var(--space-414);
+  height: var(--space-68);
+  background: var(--color-ffffff);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  border-top: 1px solid var(--color-ebebf5);
+}
+
+/* Nav item vertical layout: 30x30 icon + 10/14 label under (Figma) */
+.bottom-nav .nav-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--color-8b8787); /* default/inactive */
+}
+
+/* Active tab colors per Figma: "All" active with #9395d3, "Completed" inactive #8b8787 */
+.bottom-nav .nav-item.active {
+  color: var(--color-9395d3);
+}
+.bottom-nav .nav-item .label {
+  /* Ensure label typography colors follow parent currentColor logic for consistency */
+  color: currentColor;
+}
+
+/* Ensure nav icons inherit currentColor stroke for active/inactive states */
+.bottom-nav .nav-item .icon svg {
+  stroke: currentColor;
+}
+
+/* Responsive consideration: center the 414px artboard on larger screens */
+.screen {
+  background: var(--color-d6d7ef);
+}
+.screen-inner {
+  background: var(--color-ffffff);
+}
+
+/* Focus styles */
+button:focus-visible,
+.icon-btn:focus-visible,
+.fab:focus-visible,
+.nav-item:focus-visible {
+  outline: 2px solid var(--color-b3b7ee);
+  outline-offset: 2px;
+}
